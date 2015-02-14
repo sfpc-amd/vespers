@@ -25,15 +25,25 @@ void Vespers::setup(){
 	sequenceWindowHeight = camHeight;
     
 
-	// toggles
-	isFullScreen = false;
-    sequenceMode = false;
+    // defaults based on target
+    #ifdef OF_TARGET_LINUXARMV6L
+        sequenceMode = true;
+    #else
+        sequenceMode = false;
+    #endif
+    
+    isFullScreen = false;
     drawGui = false;
     
-	// just targeting opengl for now
-	camShader.load("shadersGL2/camShader");
-	starShader.load("shadersGL2/starShader");
-	afterImageShader.load("shadersGL2/afterImageShader");
+    #ifdef TARGET_OPENGLES
+        camShader.load("shadersES2/camShader");
+        starShader.load("shadersES2/starShader");
+        afterImageShader.load("shadersES2/afterImageShader");
+    #else
+        camShader.load("shadersGL2/camShader");
+        starShader.load("shadersGL2/starShader");
+        afterImageShader.load("shadersGL2/afterImageShader");
+    #endif
 
 	// camera setup
 	cam.setDesiredFrameRate(30);
