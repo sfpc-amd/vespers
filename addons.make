@@ -12,4 +12,3 @@ ofxMSATimer
 ofxTextInputField
 ofxRange
 ofxTween
-ofxSecondWindow
