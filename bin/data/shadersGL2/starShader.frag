@@ -44,18 +44,18 @@ vec4 blurY(in sampler2DRect tx, in vec2 uv, in float amt) {
     return color;
 }
 
+
 void main()
 {
-    
-//    vec4 outColor = blurX(tex0, texCoordVarying.xy, 0.5);
+    // add some anti-aliasing to stars
     vec4 xBlur = blurX(tex0, texCoordVarying.xy, 0.4);
     vec4 yBlur = blurY(tex0, texCoordVarying.xy, 0.4);
-
     vec4 outColor = mix(xBlur, yBlur, 0.5);
     
+    // set alpha based on input
     outColor.a *= alpha;
-    
     
     gl_FragColor = outColor;
 }
+
 
