@@ -4,6 +4,9 @@ Vespers
 Release Notes
 --------------
 
+### 0.6.2
+ - Remove unused VespersTimeline class
+
 ### 0.6.1
  - Fixed star alignment during rotation
  - Fixed disappearing mouse when hiding timeline

@@ -91,6 +91,7 @@
 		C1A1F7111A7D5BB300CEB8FC /* OpenAL32.lib in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A1F6DE1A7D5BB300CEB8FC /* OpenAL32.lib */; };
 		C1A1F7121A7D5BB300CEB8FC /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A1F6E51A7D5BB300CEB8FC /* libsndfile.a */; };
 		C1A1F7171A7D63F700CEB8FC /* VespersCv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F7151A7D63F700CEB8FC /* VespersCv.cpp */; };
+		C1EBDBA21A8FD886008E8987 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C1EBDBA11A8FD886008E8987 /* Makefile */; };
 		C602002DE761F9B52DB4400A /* ObjectFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE75A3FBA2C2D87D14F06FE6 /* ObjectFinder.cpp */; };
 		D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A4DD23693DFAB8EC05FAA5D /* ofxCvShortImage.cpp */; };
 		DBCB84A37F9AECC254870D79 /* Wrappers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D347FB65D19015303863922A /* Wrappers.cpp */; };
@@ -402,6 +403,9 @@
 		C1EBDB951A8FBB15008E8987 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		C1EBDB961A8FBB15008E8987 /* RELEASE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RELEASE.md; sourceTree = "<group>"; };
 		C1EBDB971A8FBB15008E8987 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		C1EBDB9F1A8FD886008E8987 /* addons.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addons.make; sourceTree = "<group>"; };
+		C1EBDBA01A8FD886008E8987 /* config.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.make; sourceTree = "<group>"; };
+		C1EBDBA11A8FD886008E8987 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		C4FB85020773DA0F09B8B6CE /* ts_gtest.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ts_gtest.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/ts/ts_gtest.h; sourceTree = SOURCE_ROOT; };
 		C6151136D101F857DAE12722 /* ofxCvImage.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxCvImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvImage.cpp; sourceTree = SOURCE_ROOT; };
 		C61D3DACE506E4A1C3A6D782 /* highgui.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = highgui.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/highgui/highgui.hpp; sourceTree = SOURCE_ROOT; };
@@ -1458,6 +1462,9 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				C1EBDB9F1A8FD886008E8987 /* addons.make */,
+				C1EBDBA01A8FD886008E8987 /* config.make */,
+				C1EBDBA11A8FD886008E8987 /* Makefile */,
 				C1EBDB951A8FBB15008E8987 /* README.md */,
 				C1EBDB961A8FBB15008E8987 /* RELEASE.md */,
 				C1EBDB971A8FBB15008E8987 /* VERSION */,
@@ -1625,6 +1632,7 @@
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */,
 				1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */,
+				C1EBDBA21A8FD886008E8987 /* Makefile in Sources */,
 				C1A1F6F21A7D5BB300CEB8FC /* ofxTLBangs.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
