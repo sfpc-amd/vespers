@@ -13,7 +13,7 @@ else
 fi
 
 
-${PREFIX}kylemcdonald/ofxCv.git
+${PREFIX}kylemcdonald/ofxCv.git -b 0.8.4
 
 ${PREFIX}andreasmuller/ofxAutoReloadedShader.git
 
