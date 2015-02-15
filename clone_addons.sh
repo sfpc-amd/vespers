@@ -17,7 +17,7 @@ ${PREFIX}kylemcdonald/ofxCv.git -b 0.8.4
 
 ${PREFIX}andreasmuller/ofxAutoReloadedShader.git
 
-${PREFIX}YCAMInterlab/ofxTimeline.git
+${PREFIX}andyinabox/ofxTimeline.git -b no-hotkeys
 
 # use the ofxTimeline script for the rest
 cd ofxTimeline/

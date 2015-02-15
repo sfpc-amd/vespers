@@ -50,7 +50,6 @@
 		C1A1F44B1A7D58CC00CEB8FC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A1F44A1A7D58CC00CEB8FC /* OpenAL.framework */; };
 		C1A1F44D1A7D58EE00CEB8FC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A1F44C1A7D58EE00CEB8FC /* OpenAL.framework */; };
 		C1A1F4521A7D5A0F00CEB8FC /* Vespers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F44E1A7D5A0F00CEB8FC /* Vespers.cpp */; };
-		C1A1F4531A7D5A0F00CEB8FC /* VespersTimeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F4501A7D5A0F00CEB8FC /* VespersTimeline.cpp */; };
 		C1A1F6EC1A7D5BB300CEB8FC /* ofxHotKeys_impl_linux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F6841A7D5BB300CEB8FC /* ofxHotKeys_impl_linux.cpp */; };
 		C1A1F6ED1A7D5BB300CEB8FC /* ofxHotKeys_impl_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F6851A7D5BB300CEB8FC /* ofxHotKeys_impl_mac.mm */; };
 		C1A1F6EE1A7D5BB300CEB8FC /* ofxHotKeys_impl_win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F6861A7D5BB300CEB8FC /* ofxHotKeys_impl_win.cpp */; };
@@ -294,8 +293,6 @@
 		C1A1F44C1A7D58EE00CEB8FC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		C1A1F44E1A7D5A0F00CEB8FC /* Vespers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vespers.cpp; sourceTree = "<group>"; };
 		C1A1F44F1A7D5A0F00CEB8FC /* Vespers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vespers.h; sourceTree = "<group>"; };
-		C1A1F4501A7D5A0F00CEB8FC /* VespersTimeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VespersTimeline.cpp; sourceTree = "<group>"; };
-		C1A1F4511A7D5A0F00CEB8FC /* VespersTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VespersTimeline.h; sourceTree = "<group>"; };
 		C1A1F6831A7D5BB300CEB8FC /* ofxHotKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxHotKeys.h; sourceTree = "<group>"; };
 		C1A1F6841A7D5BB300CEB8FC /* ofxHotKeys_impl_linux.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxHotKeys_impl_linux.cpp; sourceTree = "<group>"; };
 		C1A1F6851A7D5BB300CEB8FC /* ofxHotKeys_impl_mac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxHotKeys_impl_mac.mm; sourceTree = "<group>"; };
@@ -1489,8 +1486,6 @@
 				C1A1F7161A7D63F700CEB8FC /* VespersCv.h */,
 				C1A1F44E1A7D5A0F00CEB8FC /* Vespers.cpp */,
 				C1A1F44F1A7D5A0F00CEB8FC /* Vespers.h */,
-				C1A1F4501A7D5A0F00CEB8FC /* VespersTimeline.cpp */,
-				C1A1F4511A7D5A0F00CEB8FC /* VespersTimeline.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 			);
 			path = src;
@@ -1695,7 +1690,6 @@
 				5E0DBDE5736DEB3A5886B3F1 /* ofxEasingBack.cpp in Sources */,
 				EAD3CE0789481F975F351F39 /* ofxEasingBounce.cpp in Sources */,
 				27765D1BFF26BD9A6186915F /* ofxEasingCirc.cpp in Sources */,
-				C1A1F4531A7D5A0F00CEB8FC /* VespersTimeline.cpp in Sources */,
 				E816D7D242D315FB53E23F54 /* ofxEasingCubic.cpp in Sources */,
 				C1A1F6EE1A7D5BB300CEB8FC /* ofxHotKeys_impl_win.cpp in Sources */,
 				6E062274743F6716A9AD4395 /* ofxEasingElastic.cpp in Sources */,
