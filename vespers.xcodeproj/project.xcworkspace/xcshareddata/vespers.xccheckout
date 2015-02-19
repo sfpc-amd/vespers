@@ -10,69 +10,65 @@
 	<string>vespers</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>182DA6B4-7338-4D67-97DD-70732AEDDDB8</key>
-		<string>https://github.com/andyinabox/ofxTimeline.git</string>
-		<key>1B9AA260-682C-4454-A02F-1D04E1EF7505</key>
-		<string>https://github.com/Flightphase/ofxRange.git</string>
-		<key>39DC60BC-13DB-485A-B7E1-9C7E1AA50950</key>
-		<string>https://github.com/obviousjim/ofxTween.git</string>
-		<key>3CB7791C-3410-4D91-97AA-7D91340C2FD8</key>
-		<string>https://github.com/obviousjim/ofxMSATimer.git</string>
-		<key>448E9127-586B-4CC3-ABDE-D5951FA3BC5C</key>
-		<string>https://github.com/andreasmuller/ofxAutoReloadedShader.git</string>
-		<key>75635D61-CB55-4A8F-AE9B-ADF8CCB3B367</key>
+		<key>252C6127C45A1F2D4943E6963066F98DFCDB451F</key>
 		<string>https://github.com/YCAMInterlab/ofxTimecode.git</string>
-		<key>7E919BE3-0DDD-409C-B27B-C399766A78AD</key>
-		<string>https://github.com/Flightphase/ofxTextInputField.git</string>
-		<key>AF3EB00A-0551-4657-8E19-3E5BED4AE709</key>
-		<string>amdgit@andydayton.com:vespers</string>
-		<key>C5E84F46-187B-417E-8A7B-4971E0FF937F</key>
-		<string>https://github.com/paulobarcelos/ofxMacamPs3Eye.git</string>
-		<key>ED64EDCF-D979-4DEE-893F-434CA0C89F87</key>
-		<string>https://github.com/genekogan/ofxSecondWindow.git</string>
-		<key>FAAC4FD3-F534-44EC-9D48-8D6C59ABE615</key>
+		<key>37526DA425E5430474A14FBFA1BC4525160B5FC1</key>
 		<string>https://github.com/andyinabox/ofxCv.git</string>
+		<key>49ED704B24A08379C9709713E9A651DFA0CED0E3</key>
+		<string>https://github.com/Flightphase/ofxRange.git</string>
+		<key>6B5D1DE462D521A98972DF70F1147E20268C546A</key>
+		<string>https://github.com/obviousjim/ofxTween.git</string>
+		<key>9306F8A4B5C13BDC4DDB4D5C22AC1335F4D819E8</key>
+		<string>https://github.com/andyinabox/ofxTimeline.git</string>
+		<key>999015EE524680C74335938659F70512196F22AD</key>
+		<string>https://github.com/andreasmuller/ofxAutoReloadedShader.git</string>
+		<key>A6343E16BC2F648D0FEA647FB75CBADE0A25E0B8</key>
+		<string>https://github.com/Flightphase/ofxTextInputField.git</string>
+		<key>E0CB4C1C2522C94E4D03AC595BB2CF0D7F09B508</key>
+		<string>https://github.com/obviousjim/ofxMSATimer.git</string>
+		<key>ECC2D9C38BBCC4F79FFE72A7242BBA8DD2CD92CA</key>
+		<string>andydayton.com:vespers</string>
+		<key>FE87873B02C5E6719395DDAC8C0C0C585EF1FA8F</key>
+		<string>https://github.com/genekogan/ofxSecondWindow.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>vespers.xcodeproj/project.xcworkspace</string>
+	<string>vespers.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>182DA6B4-7338-4D67-97DD-70732AEDDDB8</key>
-		<string>../../../../../addons/ofxTimeline</string>
-		<key>1B9AA260-682C-4454-A02F-1D04E1EF7505</key>
-		<string>../../../../../addons/ofxRange</string>
-		<key>39DC60BC-13DB-485A-B7E1-9C7E1AA50950</key>
-		<string>../../../../../addons/ofxTween</string>
-		<key>3CB7791C-3410-4D91-97AA-7D91340C2FD8</key>
-		<string>../../../../../addons/ofxMSATimer</string>
-		<key>448E9127-586B-4CC3-ABDE-D5951FA3BC5C</key>
-		<string>../../../../../addons/ofxAutoReloadedShader</string>
-		<key>75635D61-CB55-4A8F-AE9B-ADF8CCB3B367</key>
-		<string>../../../../../addons/ofxTimecode</string>
-		<key>7E919BE3-0DDD-409C-B27B-C399766A78AD</key>
-		<string>../../../../../addons/ofxTextInputField</string>
-		<key>AF3EB00A-0551-4657-8E19-3E5BED4AE709</key>
+		<key>252C6127C45A1F2D4943E6963066F98DFCDB451F</key>
+		<string>../../../addons/ofxTimecode</string>
+		<key>37526DA425E5430474A14FBFA1BC4525160B5FC1</key>
+		<string>../../../addons/ofxCv</string>
+		<key>49ED704B24A08379C9709713E9A651DFA0CED0E3</key>
+		<string>../../../addons/ofxRange</string>
+		<key>6B5D1DE462D521A98972DF70F1147E20268C546A</key>
+		<string>../../../addons/ofxTween</string>
+		<key>9306F8A4B5C13BDC4DDB4D5C22AC1335F4D819E8</key>
+		<string>../../../addons/ofxTimeline</string>
+		<key>999015EE524680C74335938659F70512196F22AD</key>
+		<string>../../../addons</string>
+		<key>A6343E16BC2F648D0FEA647FB75CBADE0A25E0B8</key>
+		<string>../../../addons/ofxTextInputField</string>
+		<key>E0CB4C1C2522C94E4D03AC595BB2CF0D7F09B508</key>
+		<string>../../../addons/ofxMSATimer</string>
+		<key>ECC2D9C38BBCC4F79FFE72A7242BBA8DD2CD92CA</key>
 		<string>../..</string>
-		<key>C5E84F46-187B-417E-8A7B-4971E0FF937F</key>
-		<string>../../../../../addons/ofxMacamPs3Eye</string>
-		<key>ED64EDCF-D979-4DEE-893F-434CA0C89F87</key>
-		<string>../../../../../addons/ofxSecondWindow</string>
-		<key>FAAC4FD3-F534-44EC-9D48-8D6C59ABE615</key>
-		<string>../../../../../addons/ofxCv</string>
+		<key>FE87873B02C5E6719395DDAC8C0C0C585EF1FA8F</key>
+		<string>../../../addons/ofxSecondWindow</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>amdgit@andydayton.com:vespers</string>
+	<string>andydayton.com:vespers</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>AF3EB00A-0551-4657-8E19-3E5BED4AE709</string>
+	<string>ECC2D9C38BBCC4F79FFE72A7242BBA8DD2CD92CA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>448E9127-586B-4CC3-ABDE-D5951FA3BC5C</string>
+			<string>999015EE524680C74335938659F70512196F22AD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>addons</string>
 		</dict>
@@ -80,7 +76,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>448E9127-586B-4CC3-ABDE-D5951FA3BC5C</string>
+			<string>999015EE524680C74335938659F70512196F22AD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>addons</string>
 		</dict>
@@ -88,7 +84,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FAAC4FD3-F534-44EC-9D48-8D6C59ABE615</string>
+			<string>37526DA425E5430474A14FBFA1BC4525160B5FC1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxCv</string>
 		</dict>
@@ -96,15 +92,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C5E84F46-187B-417E-8A7B-4971E0FF937F</string>
-			<key>IDESourceControlWCCName</key>
-			<string>ofxMacamPs3Eye</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3CB7791C-3410-4D91-97AA-7D91340C2FD8</string>
+			<string>E0CB4C1C2522C94E4D03AC595BB2CF0D7F09B508</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxMSATimer</string>
 		</dict>
@@ -112,7 +100,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1B9AA260-682C-4454-A02F-1D04E1EF7505</string>
+			<string>49ED704B24A08379C9709713E9A651DFA0CED0E3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxRange</string>
 		</dict>
@@ -120,7 +108,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>ED64EDCF-D979-4DEE-893F-434CA0C89F87</string>
+			<string>FE87873B02C5E6719395DDAC8C0C0C585EF1FA8F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxSecondWindow</string>
 		</dict>
@@ -128,7 +116,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7E919BE3-0DDD-409C-B27B-C399766A78AD</string>
+			<string>A6343E16BC2F648D0FEA647FB75CBADE0A25E0B8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxTextInputField</string>
 		</dict>
@@ -136,7 +124,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>75635D61-CB55-4A8F-AE9B-ADF8CCB3B367</string>
+			<string>252C6127C45A1F2D4943E6963066F98DFCDB451F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxTimecode</string>
 		</dict>
@@ -144,7 +132,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>182DA6B4-7338-4D67-97DD-70732AEDDDB8</string>
+			<string>9306F8A4B5C13BDC4DDB4D5C22AC1335F4D819E8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxTimeline</string>
 		</dict>
@@ -152,7 +140,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>39DC60BC-13DB-485A-B7E1-9C7E1AA50950</string>
+			<string>6B5D1DE462D521A98972DF70F1147E20268C546A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxTween</string>
 		</dict>
@@ -160,7 +148,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>AF3EB00A-0551-4657-8E19-3E5BED4AE709</string>
+			<string>ECC2D9C38BBCC4F79FFE72A7242BBA8DD2CD92CA</string>
 			<key>IDESourceControlWCCName</key>
 			<string>vespers</string>
 		</dict>

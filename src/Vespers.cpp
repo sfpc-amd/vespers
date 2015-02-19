@@ -26,7 +26,7 @@ void Vespers::setup(){
     
 
     // defaults based on target
-    #ifdef OF_TARGET_LINUXARMV6L
+    #ifdef TARGET_RASPBERRY_PI
         sequenceMode = true;
     #else
         sequenceMode = false;
@@ -113,7 +113,9 @@ void Vespers::setup(){
 	// final version, this should put the star in the center
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
-    
+    #ifdef TARGET_RASPBERRY_PI
+        timeline.hide()
+    #endif
 }
 
 //--------------------------------------------------------------
