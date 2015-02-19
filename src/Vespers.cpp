@@ -114,7 +114,7 @@ void Vespers::setup(){
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
     #ifdef TARGET_RASPBERRY_PI
-        timeline.hide()
+        timeline.hide();
     #endif
 }
 
