@@ -1,8 +1,17 @@
 #include "ofMain.h"
 #include "Vespers.h"
 
-//========================================================================
+#define USE_PROGRAMMABLE_RENDERER
+
+#ifdef USE_PROGRAMMABLE_RENDERER
+    #include "ofGLProgrammableRenderer.h"
+#endif
+
 int main( ){
+    
+    #ifdef TARGET_OPENGLES
+        ofSetCurrentRenderer(ofGLProgrammableRenderer::TYPE);
+    #endif
     
     #ifndef OF_TARGET_LINUXARMV6L
         ofSetupOpenGL(1024,768,OF_WINDOW);

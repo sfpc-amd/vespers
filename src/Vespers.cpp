@@ -202,6 +202,7 @@ void Vespers::update(){
 void Vespers::draw(){
     ofClear(0,0,0);
 
+
     // this is the viewing area
     canvas = ofRectangle(0, 0, sequenceWindowWidth, sequenceWindowHeight);
 
