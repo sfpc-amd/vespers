@@ -1,6 +1,8 @@
 #include "ofMain.h"
 #include "Vespers.h"
 
+// i guess this is needed to run on rpi? we will see
+// http://www.creativeapplications.net/tutorials/how-to-use-openframeworks-on-the-raspberrypi-tutorial/
 #define USE_PROGRAMMABLE_RENDERER
 
 #ifdef USE_PROGRAMMABLE_RENDERER
