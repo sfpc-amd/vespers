@@ -4,7 +4,9 @@
 // i guess this is needed to run on rpi? we will see
 // http://www.creativeapplications.net/tutorials/how-to-use-openframeworks-on-the-raspberrypi-tutorial/ls
 
-#define USE_PROGRAMMABLE_RENDERER
+#ifdef TARGET_OPENGLES
+    #define USE_PROGRAMMABLE_RENDERER
+#endif
 
 #ifdef USE_PROGRAMMABLE_RENDERER
     #include "ofGLProgrammableRenderer.h"
