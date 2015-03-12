@@ -12,7 +12,7 @@
 
 int main( ){
     
-    #ifdef TARGET_OPENGLES
+    #ifdef USE_PROGRAMMABLE_RENDERER
         ofSetCurrentRenderer(ofGLProgrammableRenderer::TYPE);
     #endif
     
