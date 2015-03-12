@@ -14,7 +14,8 @@ class Vespers : public ofBaseApp {
 		void setup();
 		void update();
 		void draw();
-    
+
+        void setAfterImage();
         void receivedBang(ofxTLBangEventArgs& bang);
         void drawHud(int x, int y);
     
@@ -24,7 +25,7 @@ class Vespers : public ofBaseApp {
 			, float minRadius
 			, float maxRadius
 		);
-    
+
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -51,6 +52,7 @@ class Vespers : public ofBaseApp {
 		bool isFullScreen;
         bool drawGui;
         bool sequenceMode;
+        bool useSampleImage;
 
 		// a grabber for our camera
 		ofVideoGrabber cam;
@@ -60,6 +62,8 @@ class Vespers : public ofBaseApp {
 		ofImage gray;
         // afterimage
         ofImage afterImage;
+        // sample image
+        ofImage sampleImage;
     
 		// canvas for final image
 		ofRectangle canvas;

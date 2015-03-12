@@ -5,14 +5,14 @@
  Create base image to be used for image processing
  */
 void VespersCv::createBaseImage(
-              ofVideoGrabber &src
+              ofPixels &pix
               , ofImage &dst
               , int destWidth
               , int destHeight
               , bool convertToGray
               ) {
 	// ofImage out;
-	ofPixels pix = src.getPixelsRef();
+//	ofPixels pix = src.getPixelsRef();
     
 	// only resize if necessary
 	if(
@@ -80,7 +80,7 @@ void VespersCv::prepImage(
  Find contours of image
  */
 void VespersCv::findContours(
-               ofVideoGrabber &src
+               ofImage &src
                , ofImage &dst
                , int halfw
                , int smoothPasses

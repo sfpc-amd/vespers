@@ -4,7 +4,7 @@ class VespersCv {
 
 	public:
         static void createBaseImage(
-             ofVideoGrabber &src
+             ofPixels &pix
              , ofImage &dst
              , int destWidth
              , int destHeight
@@ -25,7 +25,7 @@ class VespersCv {
            );
     
         static void findContours(
-          ofVideoGrabber &src
+          ofImage &src
           , ofImage &dst
           , int halfw
           , int smoothPasses

@@ -45,6 +45,11 @@ void Vespers::setup(){
         afterImageShader.load("shadersGL2/afterImageShader");
     #endif
 
+    useSampleImage = false;
+    sampleImage.loadImage("vespers-sample-image.png");
+    sampleImage.resize(camWidth, camHeight);
+	sampleImage.setImageType(OF_IMAGE_COLOR);
+    
 	// camera setup
 	cam.setDesiredFrameRate(30);
 	cam.initGrabber(camWidth,camHeight);
@@ -125,7 +130,7 @@ void Vespers::update(){
     
     if(alwaysUpdateStars) {
         Vespers::findStars();
-        afterImage.setFromPixels(cam.getPixelsRef());
+        Vespers::setAfterImage();
     }
     
     // @todo: should this wrap the whole thing?
@@ -179,7 +184,12 @@ void Vespers::update(){
         camShader.setUniform1f("colorMix", timeline.getValue("Color Mix"));
         camShader.setUniform1f("time", ofMap(mouseY, 0, ofGetHeight(), 0, 1));
         // draw our image plane
-        cam.draw(0, 0);
+        if(useSampleImage) {
+            sampleImage.draw(0, 0);
+        } else {
+            cam.draw(0, 0);
+        }
+        
         
         // end the shader
         camShader.end();
@@ -251,11 +261,22 @@ void Vespers::draw(){
 
 }
 
+void Vespers::setAfterImage() {
+        ofPixels pix;
+        if(useSampleImage) {
+            pix = sampleImage.getPixelsRef();
+        } else {
+            pix = cam.getPixelsRef();
+        }
+        
+        afterImage.setFromPixels(pix);
+}
+
 void Vespers::receivedBang(ofxTLBangEventArgs& bang) {
     ofLogNotice("Bang fired from track " + bang.track->getName());
     if(bang.track->getName() == "Capture Stars"){
         Vespers::findStars();
-        afterImage.setFromPixels(cam.getPixelsRef());
+        Vespers::setAfterImage();
     }
 }
 
@@ -280,6 +301,13 @@ void Vespers::findStars() {
 	float bfSigmaColor = 140.0;
 	float bfSigmaSpace = 140.0;
 	float useNormalize = true;
+    ofPixels pix;
+    
+    if(useSampleImage) {
+        pix = sampleImage.getPixelsRef();
+    } else {
+        pix = cam.getPixelsRef();
+    }
     
     
     // add extra stars
@@ -290,7 +318,7 @@ void Vespers::findStars() {
     
 	// create base image
     VespersCv::createBaseImage(
-		cam
+		pix
 		, base
 		, procWidth
 		, procHeight
@@ -418,6 +446,9 @@ void Vespers::keyPressed(int key){
             if(!showTimeline) { ofGetWindowPtr()->showCursor(); }
             break;
 		case 'f': isFullScreen = !isFullScreen; ofToggleFullscreen(); break;
+        case 'z' :
+            useSampleImage = !useSampleImage;
+            break;
         case 's': gui.saveToFile("settings.xml"); ofLogVerbose() << "Saved config"; break;
         case 'l': gui.loadFromFile("settings.xml"); ofLogVerbose() << "Loaded config"; break;
 	}
