@@ -4,6 +4,9 @@ Vespers
 Release Notes
 --------------
 
+### 0.6.3
+ - Added sample image
+
 ### 0.6.2
  - Remove unused VespersTimeline class
 
