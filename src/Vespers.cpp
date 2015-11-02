@@ -21,8 +21,8 @@ void Vespers::setup(){
 	configWindowWidth = 1160;
 	configWindowHeight = 480;
 	// window dimensions for sequence mode
-	sequenceWindowWidth = camWidth;
-	sequenceWindowHeight = camHeight;
+	sequenceWindowWidth = 800;
+	sequenceWindowHeight = 480;
     
 
     // defaults based on target
@@ -49,6 +49,13 @@ void Vespers::setup(){
     sampleImage.loadImage("vespers-sample-image.png");
     sampleImage.resize(camWidth, camHeight);
 	sampleImage.setImageType(OF_IMAGE_COLOR);
+    
+    // 3d glasses setup
+	glasses.setup(400, 400);
+	glasses.setScale(1, 1, 1);
+	glasses.setPhysicalFocusDistance(120);
+	glasses.setFocusDistance(50);
+	glasses.setNearClip(0.1);
     
 	// camera setup
 	cam.setDesiredFrameRate(30);
@@ -194,6 +201,7 @@ void Vespers::update(){
         // end the shader
         camShader.end();
         mainFbo.end();
+        
     }
     
     //    if (timeline.isSwitchOn("Show AfterImage")) {
@@ -206,15 +214,45 @@ void Vespers::update(){
         afterImageShader.end();
     }
     
+    
+    
+    if(sequenceMode) {
+    
+        glasses.update(ofRectangle(0, 0, 400, 400));
+        
+        glasses.beginLeft();
+            drawSequence();
+        glasses.endLeft();
+        
+        glasses.beginRight();
+            drawSequence();
+        glasses.endRight();
+    }
+    
 }
 
 //--------------------------------------------------------------
 void Vespers::draw(){
-    ofClear(0,0,0);
+    ofClear(0);
+    
+    if(sequenceMode) {
+        glasses.drawLeft(0, 80, 400, 400);
+        glasses.drawRight(400, 80, 400, 400);
+    
+    } else {
+        drawSequence();
+    }
+}
 
+void Vespers::drawSequence() {
+    ofClear(0);
+
+    if(sequenceMode) {
+        ofTranslate(-320, -240);
+    }
 
     // this is the viewing area
-    canvas = ofRectangle(0, 0, sequenceWindowWidth, sequenceWindowHeight);
+    canvas = ofRectangle(0, 0, sequenceWindowWidth/2, sequenceWindowHeight);
 
     // draw the main image FBO
     if(timeline.getValue("Vignette Radius") > 0) {
@@ -258,7 +296,7 @@ void Vespers::draw(){
         // draw the timeline
         timeline.draw();
     }
-
+    
 }
 
 void Vespers::setAfterImage() {
