@@ -40,10 +40,12 @@ void Vespers::setup(){
         camShader.load("shadersES2/camShader");
         starShader.load("shadersES2/starShader");
         afterImageShader.load("shadersES2/afterImageShader");
+        transitionShader.load("shadersES2/transitionShader");
     #else
         camShader.load("shadersGL2/camShader");
         starShader.load("shadersGL2/starShader");
         afterImageShader.load("shadersGL2/afterImageShader");
+        transitionShader.load("shadersGL2/transitionShader");
     #endif
 
     // sample image
@@ -98,19 +100,35 @@ void Vespers::setup(){
     // TIMELINE SETUP
 	timeline.setup();
 	timeline.setFrameRate(30);
-	timeline.setDurationInFrames(570);
+	timeline.setDurationInFrames(1000);
     
-	timeline.setLoopType(OF_LOOP_NORMAL);
-	timeline.addCurves("Vignette Radius", ofRange(0, 1));
-	timeline.addCurves("Stars Alpha", ofRange(0, 1));
-	timeline.addCurves("Random Stars", ofRange(0, 1));
-    timeline.addCurves("Stars Rotation", ofRange(-90.f,90.f));
-    timeline.addBangs("Capture Stars");
-    timeline.addColors("Video Color");
-    timeline.addCurves("Color Mix", ofRange(0,1));
-    timeline.addCurves("AfterImage Alpha", ofRange(0,1));
-    timeline.addCurves("AfterImage Blur", ofRange(0,50));
-    timeline.addCurves("AfterImage Threshold", ofRange(0,3));
+    timeline.setPageName("Page Main Sequence");
+    timeline.addPage("Page Transition");
+
+    timeline.setCurrentPage("Page Main Sequence");
+        timeline.setLoopType(OF_LOOP_NORMAL);
+        timeline.addCurves("Vignette Radius", ofRange(0, 1));
+        timeline.addCurves("Stars Alpha", ofRange(0, 1));
+        timeline.addCurves("Random Stars", ofRange(0, 1));
+        timeline.addCurves("Stars Rotation", ofRange(-90.f,90.f));
+        timeline.addBangs("Capture Stars");
+        timeline.addColors("Video Color");
+        timeline.addCurves("Color Mix", ofRange(0,1));
+        timeline.addCurves("AfterImage Alpha", ofRange(0,1));
+        timeline.addCurves("AfterImage Blur", ofRange(0,50));
+        timeline.addCurves("AfterImage Threshold", ofRange(0,3));
+
+    timeline.setCurrentPage("Page Transition");
+        float moireMaxAmount = ofRandom(50.0, 100.0);
+
+        timeline.addCurves("Triangle Z", ofRange(-10000.0, 1000.0));
+        timeline.addCurves("Moire Spacing", ofRange(1.0, 45.0));
+        timeline.addCurves("Moire Amount", ofRange(1.0, moireMaxAmount));
+        timeline.addCurves("Text Opacity", ofRange(1.0, 255.0));
+        timeline.addCurves("Shape Opacity", ofRange(0.0, 1.0));
+        // wanted this to be switches but it wasnt working
+//        timeline.addSwitches("Tr Enabled");
+    timeline.setCurrentPage("Page Main Sequence");
 
     // setup listender for bangs
     ofAddListener(timeline.events().bangFired, this, &Vespers::receivedBang);
@@ -135,6 +153,11 @@ void Vespers::setup(){
 void Vespers::update(){
 
 	cam.update();
+    
+    if(timeline.getValue("Shape Opacity")  > 0) {
+        updateTransition();
+    }
+    
     
     // if we're calibrating star display,
     // this will always update them
@@ -253,15 +276,62 @@ void Vespers::update(){
         // capture left eye in fbo
         glasses.beginLeft();
             drawSequence();
+            drawTransition();
         glasses.endLeft();
         
         // capture right eye in fbo
         glasses.beginRight();
             drawSequence();
+            drawTransition();
         glasses.endRight();
     }
     
 }
+
+void Vespers::updateTransition() {
+   triangleZ = timeline.getValue("Triangle Z");
+   moireSpacing = timeline.getValue("Moire Spacing");
+   moireAmount = timeline.getValue("Moire Amount");
+   textOpacity = timeline.getValue("Text Opacity");
+   shapeOpacity = timeline.getValue("Shape Opacity");
+
+
+    if(shapeOpacity > 0) {
+
+       transitionShader.begin();
+            transitionShader.setUniform4f(
+                "iMouse"
+                , mouseX
+                , mouseY
+                , 0.0
+                , 0.0
+            );
+            transitionShader.setUniform3f(
+                "iResolution"
+                , ofGetWidth()
+                , ofGetHeight()
+                , 0.0
+            );
+            transitionShader.setUniform1f(
+                "iGlobalTime"
+                , ofGetElapsedTimef()
+            );// elapsed time
+            transitionShader.setUniform1i(
+                "moireSpacing"
+                , moireSpacing
+            );
+            transitionShader.setUniform1i(
+                "moireAmount"
+                , moireAmount
+            );
+            transitionShader.setUniform1f(
+                "shapeOpacity"
+                , shapeOpacity
+            );
+        transitionShader.end();
+    }
+}
+
 
 //--------------------------------------------------------------
 void Vespers::draw(){
@@ -277,6 +347,7 @@ void Vespers::draw(){
     
         // otherwise just draw normally
         drawSequence();
+        drawTransition();
         
         // show gui (won't draw if timeline is enabled)
         if(drawGui) {
@@ -288,7 +359,7 @@ void Vespers::draw(){
         // draw thresholded image
         gray.draw(camWidth+guiWidth, procHeight);
         // draw the Hud
-        Vespers::drawHud(5, 15);
+        Vespers::drawHud(5, ofGetHeight()-5);
         // draw the timeline
         timeline.draw();
     }
@@ -332,7 +403,50 @@ void Vespers::drawSequence() {
     ofDisableBlendMode();
 }
 
+void Vespers::drawTransition() {
+//    ofBackground(0);
+       float radius = 2*(camHeight/5);
+    
+        if(timeline.getValue("Shape Opacity")  > 0) {
+        
 
+            transitionShader.begin();
+        
+                ofNoFill();
+
+        
+                for(int i = 0; i < abs(moireAmount); i++) {
+                
+                    ofPushMatrix();
+                    ofSetColor(255, 255, 255, 0.5);
+
+                    ofTranslate(camWidth/2, camHeight/2);
+
+                    ofPoint p1 = ofPoint(cos(ofDegToRad(0-90))*radius, sin(ofDegToRad(0-90))*radius, triangleZ);
+                    ofPoint p2 = ofPoint(cos(ofDegToRad(120-90))*radius, sin(ofDegToRad(120-90))*radius, triangleZ);
+                    ofPoint p3 = ofPoint(cos(ofDegToRad(240-90))*radius, sin(ofDegToRad(240-90))*radius, triangleZ);
+                
+            
+                    ofPushMatrix();
+                        ofRotate(i*moireAmount*moireSpacing, 0, 0, 1);
+                        ofTriangle(p1, p2, p3);
+                    ofPopMatrix();
+                    
+                    ofLine(ofPoint(0, -camHeight, 0), p1);
+                    ofLine(ofPoint(camWidth, camHeight, 0), p2);
+                    ofLine(ofPoint(-camWidth, camHeight, 0), p3);
+     
+                    ofPopMatrix();
+                    
+               }
+        
+        
+
+            transitionShader.end();
+
+            ofSetColor(255);
+        }
+}
 
 void Vespers::setAfterImage() {
         ofPixels pix;

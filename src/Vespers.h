@@ -14,8 +14,11 @@ class Vespers : public ofBaseApp {
 	public:
 		void setup();
 		void update();
+		void updateTransition();
+
 		void draw();
         void drawSequence();
+        void drawTransition();
 
         void setAfterImage();
         void receivedBang(ofxTLBangEventArgs& bang);
@@ -55,6 +58,13 @@ class Vespers : public ofBaseApp {
         bool drawGui;
         bool sequenceMode;
         bool useSampleImage;
+    
+        // transition stuff
+        float triangleZ;
+        float moireSpacing;
+        float moireAmount;
+        float textOpacity;
+        float shapeOpacity;
 
         ofxStereoCamera<ofEasyCam> glasses;
 
@@ -82,10 +92,13 @@ class Vespers : public ofBaseApp {
 		// shader stuff
 		ofFbo mainFbo;
         ofFbo starsFbo;
+    
+
 
 		ofxAutoReloadedShader camShader;
 		ofxAutoReloadedShader starShader;
         ofxAutoReloadedShader afterImageShader;
+        ofxAutoReloadedShader transitionShader;
 
         // GUI
     
