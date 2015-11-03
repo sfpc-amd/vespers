@@ -5,6 +5,7 @@
 #include "ofxGui.h"
 #include "ofxAutoReloadedShader.h"
 #include "ofxTimeline.h"
+#include "ofxStereoCamera.h"
 
 #include "VespersCv.h"
 
@@ -14,6 +15,7 @@ class Vespers : public ofBaseApp {
 		void setup();
 		void update();
 		void draw();
+        void drawSequence();
 
         void setAfterImage();
         void receivedBang(ofxTLBangEventArgs& bang);
@@ -53,6 +55,8 @@ class Vespers : public ofBaseApp {
         bool drawGui;
         bool sequenceMode;
         bool useSampleImage;
+
+        ofxStereoCamera<ofEasyCam> glasses;
 
 		// a grabber for our camera
 		ofVideoGrabber cam;

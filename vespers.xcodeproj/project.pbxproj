@@ -389,6 +389,7 @@
 		C1A1F72F1A7D95B600CEB8FC /* starShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = starShader.frag; sourceTree = "<group>"; };
 		C1A1F7301A7D95B600CEB8FC /* starShader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = starShader.vert; sourceTree = "<group>"; };
 		C1C56D20A1A57DC44096BFE7 /* ofxCvContourFinder.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxCvContourFinder.h; path = ../../../addons/ofxOpenCv/src/ofxCvContourFinder.h; sourceTree = SOURCE_ROOT; };
+		C1D024101BE796940081D3ED /* ofxStereoCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxStereoCamera.h; sourceTree = "<group>"; };
 		C1E0D37F1A7FA465009A5CD2 /* afterImageShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = afterImageShader.frag; sourceTree = "<group>"; };
 		C1E0D3801A7FA465009A5CD2 /* afterImageShader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = afterImageShader.vert; sourceTree = "<group>"; };
 		C1E9A77E1A8BFD1A00830987 /* afterImageShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = afterImageShader.frag; sourceTree = "<group>"; };
@@ -1020,6 +1021,7 @@
 				AB88B4FD5D7F4ABF53230E5A /* ofxTextInputField */,
 				8EFD6815C031741FFAA1A001 /* ofxTimecode */,
 				1F293A20D2B096D59C4F24DD /* ofxTween */,
+				C1D0240E1BE796940081D3ED /* ofxStereoCamera */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -1370,6 +1372,23 @@
 				C1A1F72A1A7D952F00CEB8FC /* camShader.vert */,
 			);
 			path = shadersGL2;
+			sourceTree = "<group>";
+		};
+		C1D0240E1BE796940081D3ED /* ofxStereoCamera */ = {
+			isa = PBXGroup;
+			children = (
+				C1D0240F1BE796940081D3ED /* src */,
+			);
+			name = ofxStereoCamera;
+			sourceTree = "<group>";
+		};
+		C1D0240F1BE796940081D3ED /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C1D024101BE796940081D3ED /* ofxStereoCamera.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxStereoCamera/src;
 			sourceTree = "<group>";
 		};
 		C58CC92A5283B95AA31D50FB /* video */ = {
@@ -1990,7 +2009,7 @@
 					/Users/amdayton/Code/ofx/0.8.4/addons/ofxTimeline/libs/sndfile/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/sndfile/include/ ../../../addons/ofxTimeline/libs/kiss/include/ ../../../addons/ofxTimeline/libs/openal/include/";
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/kiss/include/ ../../../addons/ofxTimeline/libs/openal/include/ ../../../addons/ofxTimeline/libs/sndfile/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2085,7 +2104,7 @@
 					/Users/amdayton/Code/ofx/0.8.4/addons/ofxTimeline/libs/sndfile/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/sndfile/include/ ../../../addons/ofxTimeline/libs/kiss/include/ ../../../addons/ofxTimeline/libs/openal/include/";
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/kiss/include/ ../../../addons/ofxTimeline/libs/openal/include/ ../../../addons/ofxTimeline/libs/sndfile/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
