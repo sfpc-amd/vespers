@@ -56,6 +56,8 @@ void Vespers::setup(){
     
     // 3d glasses setup
 	glasses.setup(400, 400);
+//    glasses.disableMouseInput();
+//    glasses.disableMouseMiddleButton();
 	glasses.setScale(1, 1, 1);
 	glasses.setPhysicalFocusDistance(120);
 	glasses.setFocusDistance(50);
