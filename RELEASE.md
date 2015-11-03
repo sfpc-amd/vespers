@@ -4,6 +4,10 @@ Vespers
 Release Notes
 --------------
 
+### 0.7.1
+ - Add transition sequence to timeline
+ - Added second tab to timeline for trans controls
+
 ### 0.7.0
  - Now rendering left/right stereo channels for sequence mode!
  - A bit of cleanup
