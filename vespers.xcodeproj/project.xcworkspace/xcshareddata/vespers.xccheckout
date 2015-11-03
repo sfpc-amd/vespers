@@ -46,7 +46,7 @@
 		<key>6B5D1DE462D521A98972DF70F1147E20268C546A</key>
 		<string>../../../addons/ofxTween</string>
 		<key>7A479C32A2264E9774DA0BC348F00DA96CD462F3</key>
-		<string>../../../../../addons/ofxStereoCamera</string>
+		<string>../../../addons/ofxStereoCamera</string>
 		<key>9306F8A4B5C13BDC4DDB4D5C22AC1335F4D819E8</key>
 		<string>../../../addons/ofxTimeline</string>
 		<key>999015EE524680C74335938659F70512196F22AD</key>

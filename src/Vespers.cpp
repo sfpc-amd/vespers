@@ -35,6 +35,7 @@ void Vespers::setup(){
     isFullScreen = false;
     drawGui = false;
     
+    // load shaders!
     #ifdef TARGET_OPENGLES
         camShader.load("shadersES2/camShader");
         starShader.load("shadersES2/starShader");
@@ -45,6 +46,7 @@ void Vespers::setup(){
         afterImageShader.load("shadersGL2/afterImageShader");
     #endif
 
+    // sample image
     useSampleImage = false;
     sampleImage.loadImage("vespers-sample-image.png");
     sampleImage.resize(camWidth, camHeight);
@@ -69,7 +71,6 @@ void Vespers::setup(){
 	starsCam.setScale(1,-1,1);
 
     // GUI SETUP
-    
 	gui.setup();
 	gui.add(prepLabel.setup("IMAGE PREP", ""));
 
@@ -95,7 +96,6 @@ void Vespers::setup(){
     gui.add(starsCamZoom.setup("Stars Cam Zoom", 415.f, 0.f, 1000.f ));
 
     // TIMELINE SETUP
-    
 	timeline.setup();
 	timeline.setFrameRate(30);
 	timeline.setDurationInFrames(570);
@@ -112,6 +112,7 @@ void Vespers::setup(){
     timeline.addCurves("AfterImage Blur", ofRange(0,50));
     timeline.addCurves("AfterImage Threshold", ofRange(0,3));
 
+    // setup listender for bangs
     ofAddListener(timeline.events().bangFired, this, &Vespers::receivedBang);
     
     // play by default
@@ -135,6 +136,8 @@ void Vespers::update(){
 
 	cam.update();
     
+    // if we're calibrating star display,
+    // this will always update them
     if(alwaysUpdateStars) {
         Vespers::findStars();
         Vespers::setAfterImage();
@@ -147,14 +150,21 @@ void Vespers::update(){
 		gray.update();
 	}
     
- 	// resize window for sequence mode
+ 	// set window mode
 	if(!isFullScreen && sequenceMode && ofGetWidth() != sequenceWindowWidth) {
+        
+        // resize window for sequence mode
 		ofSetWindowShape(sequenceWindowWidth, sequenceWindowHeight);
-        // resize window for config mode
+        
 	} else if (!isFullScreen && !sequenceMode && ofGetWidth() != configWindowWidth) {
+    
+        // resize window for config mode
 		ofSetWindowShape(configWindowWidth, configWindowHeight);
 	}
     
+    
+    
+    // update stars!
     if(timeline.getValue("Stars Alpha") > 0 || (bool) alwaysUpdateStars) {
         
         float alpha = (bool) alwaysUpdateStars ? 1.0 : timeline.getValue("Stars Alpha");
@@ -169,61 +179,83 @@ void Vespers::update(){
 
     }
     
-    // render the main fbo
+    // render the main fbo if the vignette isn't completely closed
     if(timeline.getValue("Vignette Radius") > 0) {
+    
+        // fbo for the main composition
         mainFbo.begin();
-        ofClear(0, 0, 0, 255);
-        camShader.begin();
         
-        // set uniforms
-        camShader.setUniform2f("center", ofMap(northStar.x, 0, sequenceWindowWidth, 0, 1), ofMap(northStar.y, 0, sequenceWindowHeight, 0, 1));
-        camShader.setUniform1f("radius", timeline.getValue("Vignette Radius"));
-        camShader.setUniform1f("softness", 1);
-        camShader.setUniform1f("opacity", 1.0);
-        camShader.setUniform2f("resolution", camWidth, camHeight);
+            // clear it!
+            ofClear(0, 0, 0, 255);
         
-        ofColor camColor = timeline.getColor("Video Color");
-        camShader.setUniform3f("inputColor",
-           ofMap(camColor.r, 0, 255, 0, 1),
-           ofMap(camColor.g, 0, 255, 0, 1),
-           ofMap(camColor.b, 0, 255, 0, 1)
-        );
-        camShader.setUniform1f("colorMix", timeline.getValue("Color Mix"));
-        camShader.setUniform1f("time", ofMap(mouseY, 0, ofGetHeight(), 0, 1));
-        // draw our image plane
-        if(useSampleImage) {
-            sampleImage.draw(0, 0);
-        } else {
-            cam.draw(0, 0);
-        }
+            // stup the camera image shader
+            camShader.begin();
+
+                // translate star coordinates for shader
+                float starX = ofMap(northStar.x, 0, sequenceWindowWidth, 0, 1);
+                float starY = ofMap(northStar.y, 0, sequenceWindowHeight, 0, 1);
+
+                // overlay color
+                ofColor camColor = timeline.getColor("Video Color");
+        
+                // set uniforms
+                camShader.setUniform2f("center", starX, starY);
+                camShader.setUniform1f("radius", timeline.getValue("Vignette Radius"));
+                camShader.setUniform1f("softness", 1);
+                camShader.setUniform1f("opacity", 1.0);
+                camShader.setUniform2f("resolution", camWidth, camHeight);
+                camShader.setUniform3f("inputColor",
+                   ofMap(camColor.r, 0, 255, 0, 1),
+                   ofMap(camColor.g, 0, 255, 0, 1),
+                   ofMap(camColor.b, 0, 255, 0, 1)
+                );
+                camShader.setUniform1f("colorMix", timeline.getValue("Color Mix"));
+                camShader.setUniform1f("time", ofMap(mouseY, 0, ofGetHeight(), 0, 1));
         
         
-        // end the shader
-        camShader.end();
+                // either draw the sample image or the actual one
+                if(useSampleImage) {
+                    // draw the sample image
+                    sampleImage.draw(0, 0);
+                } else {
+                    // draw the actual image
+                    cam.draw(0, 0);
+                }
+                
+                
+                // end the shader
+            camShader.end();
         mainFbo.end();
         
     }
     
-    //    if (timeline.isSwitchOn("Show AfterImage")) {
+    
+    // setup the after image shader only if the alpha is > 0
     if (timeline.getValue("AfterImage Alpha") > 0) {
         
         afterImageShader.begin();
-        afterImageShader.setUniform1f("alpha", timeline.getValue("AfterImage Alpha"));
-        afterImageShader.setUniform1f("blur", timeline.getValue("AfterImage Blur"));
-        afterImageShader.setUniform1f("threshold", timeline.getValue("AfterImage Threshold"));
+            afterImageShader.setUniform1f("alpha", timeline.getValue("AfterImage Alpha"));
+            afterImageShader.setUniform1f("blur", timeline.getValue("AfterImage Blur"));
+            afterImageShader.setUniform1f("threshold", timeline.getValue("AfterImage Threshold"));
         afterImageShader.end();
     }
     
     
     
+    // if we're in sequence mode that means
+    // set up the stereo camera so we can
+    // show in 3d
     if(sequenceMode) {
     
+        // update camera
         glasses.update(ofRectangle(0, 0, 400, 400));
         
+        // capture left eye in fbo
         glasses.beginLeft();
             drawSequence();
         glasses.endLeft();
         
+        // capture right eye in fbo
         glasses.beginRight();
             drawSequence();
         glasses.endRight();
@@ -236,19 +268,39 @@ void Vespers::draw(){
     ofClear(0);
     
     if(sequenceMode) {
+    
+        // if in sequence mode, we draw each eye
+        // from the stereo camera separately
         glasses.drawLeft(0, 80, 400, 400);
         glasses.drawRight(400, 80, 400, 400);
-    
     } else {
+    
+        // otherwise just draw normally
         drawSequence();
+        
+        // show gui (won't draw if timeline is enabled)
+        if(drawGui) {
+            gui.setPosition(camWidth, 0);
+            gui.draw();
+        }
+        // draw base image in greyscale
+        base.draw(camWidth+guiWidth,0);
+        // draw thresholded image
+        gray.draw(camWidth+guiWidth, procHeight);
+        // draw the Hud
+        Vespers::drawHud(5, 15);
+        // draw the timeline
+        timeline.draw();
     }
 }
+
 
 void Vespers::drawSequence() {
     ofClear(0);
 
+    // in sequence mode, translating to offset camera
     if(sequenceMode) {
-        ofTranslate(-320, -240);
+        ofTranslate(-(camWidth/2), -(camHeight/2));
     }
 
     // this is the viewing area
@@ -278,29 +330,13 @@ void Vespers::drawSequence() {
             starShader.end();
         }
     ofDisableBlendMode();
-
-    
-    if(!sequenceMode) {
-        
-        // show gui (won't draw if timeline is enabled)
-        if(drawGui) {
-            gui.setPosition(sequenceWindowWidth, 0);
-            gui.draw();
-        }
-        // draw base image in greyscale
-        base.draw(sequenceWindowWidth+guiWidth,0);
-        // draw thresholded image
-        gray.draw(sequenceWindowWidth+guiWidth, procHeight);
-        // draw the Hud
-        Vespers::drawHud(5, 15);
-        // draw the timeline
-        timeline.draw();
-    }
-    
 }
+
+
 
 void Vespers::setAfterImage() {
         ofPixels pix;
+    
         if(useSampleImage) {
             pix = sampleImage.getPixelsRef();
         } else {

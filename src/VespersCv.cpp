@@ -11,8 +11,6 @@ void VespersCv::createBaseImage(
               , int destHeight
               , bool convertToGray
               ) {
-	// ofImage out;
-//	ofPixels pix = src.getPixelsRef();
     
 	// only resize if necessary
 	if(
