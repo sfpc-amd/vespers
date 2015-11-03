@@ -4,6 +4,10 @@ Vespers
 Release Notes
 --------------
 
+### 0.7.0
+ - Now rendering left/right stereo channels for sequence mode!
+ - A bit of cleanup
+
 ### 0.6.3
  - Added sample image
 
