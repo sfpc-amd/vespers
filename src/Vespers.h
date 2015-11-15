@@ -66,7 +66,7 @@ class Vespers : public ofBaseApp {
         float textOpacity;
         float shapeOpacity;
 
-        ofxStereoCamera<ofEasyCam> glasses;
+        ofxStereoCamera<ofCamera> glasses;
 
 		// a grabber for our camera
 		ofVideoGrabber cam;

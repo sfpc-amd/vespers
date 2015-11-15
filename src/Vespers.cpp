@@ -55,13 +55,14 @@ void Vespers::setup(){
 	sampleImage.setImageType(OF_IMAGE_COLOR);
     
     // 3d glasses setup
-	glasses.setup(400, 400);
-//    glasses.disableMouseInput();
+//        glasses.disableMouseInput();
 //    glasses.disableMouseMiddleButton();
+    glasses.setup(400, 400);
 	glasses.setScale(1, 1, 1);
 	glasses.setPhysicalFocusDistance(50);
 	glasses.setFocusDistance(50);
 	glasses.setNearClip(0.1);
+    glasses.setGlobalPosition(0, 0, 500);
     
 	// camera setup
 	cam.setDesiredFrameRate(30);
