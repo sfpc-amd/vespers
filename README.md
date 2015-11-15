@@ -19,6 +19,7 @@ constellations from images.
 
 It is also essentially a second crack at [starryNight](https://github.com/andyinabox/starryNight).
 
+
 References
 ----------
 

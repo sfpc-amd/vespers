@@ -10,11 +10,11 @@ void Vespers::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
 
     // camera source dimensions
-	camWidth = 640;
+	camWidth = 720;
 	camHeight = 480;
 	// processing image dimensions
-	procWidth = 320;
-	procHeight = 240;
+	procWidth = camWidth/2;
+	procHeight = camHeight/2;
 	// config mode gui dimensions
 	guiWidth = 200;
 	// window dimensions for config mode
@@ -59,7 +59,7 @@ void Vespers::setup(){
 //    glasses.disableMouseInput();
 //    glasses.disableMouseMiddleButton();
 	glasses.setScale(1, 1, 1);
-	glasses.setPhysicalFocusDistance(120);
+	glasses.setPhysicalFocusDistance(50);
 	glasses.setFocusDistance(50);
 	glasses.setNearClip(0.1);
     

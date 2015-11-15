@@ -1,5 +1,11 @@
 <keyframes>
     <key>
+        <easefunc>0</easefunc>
+        <easetype>0</easetype>
+        <time>00:00:17:125</time>
+        <value>0.639999986</value>
+    </key>
+    <key>
         <easefunc>1</easefunc>
         <easetype>1</easetype>
         <time>00:00:20:716</time>
