@@ -20,9 +20,8 @@ class VespersDetectParticipant {
         void setRegion(ofRectangle r);
         float getPresence();
     
-        ofImage current;
         ofImage thresholded;
-        ofRectangle region;
+        cv::Rect region;
     
         ofxCv::RunningBackground background;
         

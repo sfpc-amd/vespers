@@ -15,8 +15,15 @@ void VespersDetectParticipant::setup() {
 }
 
 void VespersDetectParticipant::update(ofVideoGrabber &frame) {
-//    current.cropFrom(cur, region.x, region.y, region.getWidth(), region.getHeight());
-    background.update(frame, thresholded);
+//    cropped.cropFrom(frame, region.x, region.y, region.getWidth(), region.getHeight());
+
+    cv::Mat roi;
+//    cv::Mat frameMat;
+    
+//    frameMat = ofxCv::toCv(frame);
+    roi = ofxCv::toCv(frame)(region);
+    
+    background.update(roi, thresholded);
     thresholded.update();
 }
 
@@ -27,7 +34,7 @@ void VespersDetectParticipant::draw(int x, int y, int w, int h) {
 
 
 void VespersDetectParticipant::setRegion(ofRectangle r) {
-    region = r;
+    region = cv::Rect(r.x, r.y, r.width, r.height);
 }
 
 

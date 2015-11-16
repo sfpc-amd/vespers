@@ -91,6 +91,10 @@ void Vespers::setup(){
     // detection
 	gui.add(detectLabel.setup("DETECTION", ""));
 	gui.add(detectThreshold.setup("Detect threshold", 0.09, 0.0, 1.0));
+    gui.add(useDetection.setup("Use detection", true));
+	gui.add(detectRegionWidth.setup("Detect region width", 200, 0, camWidth));
+    gui.add(detectRegionHeight.setup("Detect region height", 200, 0, camHeight));
+
 
 
     // TIMELINE SETUP
@@ -164,6 +168,9 @@ void Vespers::update(){
 		// update all images
 		base.update();
 		gray.update();
+        
+        
+        detect.setRegion(ofRectangle(northStar, detectRegionWidth, detectRegionHeight));
         detect.update(grabber);
         
         if(detect.getPresence() < detectThreshold) {
@@ -634,6 +641,10 @@ void Vespers::keyPressed(int key){
             break;
         case 's': gui.saveToFile("settings.xml"); ofLogVerbose() << "Saved config"; break;
         case 'l': gui.loadFromFile("settings.xml"); ofLogVerbose() << "Loaded config"; break;
+        case 'r':
+            detect.resetBackground();
+            break;
+
 	}
 }
 
@@ -655,6 +666,8 @@ void Vespers::mouseDragged(int x, int y, int button){
 	if(canvas.inside(transX, transY)) {
 		northStar.x = transX;
 		northStar.y = transY;
+        // reset detection area
+        detect.resetBackground();
 	}
 }
 

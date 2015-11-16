@@ -136,6 +136,9 @@ class Vespers : public ofBaseApp {
         // detection
 		ofxLabel detectLabel;
         ofxFloatSlider detectThreshold;
+        ofxToggle useDetection;
+        ofxIntSlider detectRegionWidth;
+        ofxIntSlider detectRegionHeight;
 
 
         // timeline
