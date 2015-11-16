@@ -94,6 +94,7 @@ void Vespers::setup(){
     gui.add(useDetection.setup("Use detection", true));
 	gui.add(detectRegionWidth.setup("Detect region width", 200, 0, camWidth));
     gui.add(detectRegionHeight.setup("Detect region height", 200, 0, camHeight));
+    gui.add(resetBackgroundDelay.setup("Background reset delay", 2000, 0, 120000));
 
 
 
@@ -141,8 +142,7 @@ void Vespers::setup(){
 	// final version, this should put the star in the center
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
-    detect.setup();
-
+    detect.setup(ofRectangle(northStar, detectRegionWidth, detectRegionHeight), detectThreshold);
 }
 
 //--------------------------------------------------------------
@@ -168,19 +168,8 @@ void Vespers::update(){
 		// update all images
 		base.update();
 		gray.update();
-        
-        
-        detect.setRegion(ofRectangle(northStar, detectRegionWidth, detectRegionHeight));
+        detect.setPresenceThreshold(detectThreshold);
         detect.update(grabber);
-        
-        if(detect.getPresence() < detectThreshold) {
-            timeline.stop();
-            timeline.setCurrentFrame(0);
-        } else {
-            timeline.play();
-        }
-        
-//        cout << "presence " << detect.getPresence() << endl;
 	}
     
  	// set window mode
@@ -280,6 +269,16 @@ void Vespers::update(){
     // show in 3d
     if(sequenceMode) {
     
+        // use background subtration to detect if someone is there
+        if(useDetection) {
+            if(!detect.getPresence()) {
+                timeline.stop();
+                timeline.setCurrentFrame(0);
+            } else {
+                timeline.play();
+            }
+        }
+        
         // update camera
         stereoCam.update(ofRectangle(0, 0, 400, 400));
         
@@ -642,7 +641,7 @@ void Vespers::keyPressed(int key){
         case 's': gui.saveToFile("settings.xml"); ofLogVerbose() << "Saved config"; break;
         case 'l': gui.loadFromFile("settings.xml"); ofLogVerbose() << "Loaded config"; break;
         case 'r':
-            detect.resetBackground();
+            detect.resetBackground(resetBackgroundDelay, ofRectangle(northStar, detectRegionWidth, detectRegionHeight));
             break;
 
 	}
@@ -666,8 +665,6 @@ void Vespers::mouseDragged(int x, int y, int button){
 	if(canvas.inside(transX, transY)) {
 		northStar.x = transX;
 		northStar.y = transY;
-        // reset detection area
-        detect.resetBackground();
 	}
 }
 

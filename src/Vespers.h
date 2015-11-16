@@ -139,6 +139,8 @@ class Vespers : public ofBaseApp {
         ofxToggle useDetection;
         ofxIntSlider detectRegionWidth;
         ofxIntSlider detectRegionHeight;
+        ofxIntSlider resetBackgroundDelay;
+
 
 
         // timeline

@@ -48,6 +48,7 @@
 		B6840996567E78436F7ECFAB /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B047FF96258DC01792B272DB /* ETF.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		C12B2A5C1BF97E0A00D12D27 /* VespersDetectParticipant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C12B2A5A1BF97E0A00D12D27 /* VespersDetectParticipant.cpp */; };
+		C12B2A621BF9F8EC00D12D27 /* ofxSimpleTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C12B2A601BF9F8EC00D12D27 /* ofxSimpleTimer.cpp */; };
 		C1A1F44B1A7D58CC00CEB8FC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A1F44A1A7D58CC00CEB8FC /* OpenAL.framework */; };
 		C1A1F44D1A7D58EE00CEB8FC /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A1F44C1A7D58EE00CEB8FC /* OpenAL.framework */; };
 		C1A1F4521A7D5A0F00CEB8FC /* Vespers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A1F44E1A7D5A0F00CEB8FC /* Vespers.cpp */; };
@@ -292,6 +293,8 @@
 		BCB6A6D9093FF11EE0D7D470 /* ofxTextInputField.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTextInputField.cpp; path = ../../../addons/ofxTextInputField/src/ofxTextInputField.cpp; sourceTree = SOURCE_ROOT; };
 		C12B2A5A1BF97E0A00D12D27 /* VespersDetectParticipant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VespersDetectParticipant.cpp; sourceTree = "<group>"; };
 		C12B2A5B1BF97E0A00D12D27 /* VespersDetectParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VespersDetectParticipant.h; sourceTree = "<group>"; };
+		C12B2A601BF9F8EC00D12D27 /* ofxSimpleTimer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSimpleTimer.cpp; sourceTree = "<group>"; };
+		C12B2A611BF9F8EC00D12D27 /* ofxSimpleTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSimpleTimer.h; sourceTree = "<group>"; };
 		C1A1F44A1A7D58CC00CEB8FC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		C1A1F44C1A7D58EE00CEB8FC /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		C1A1F44E1A7D5A0F00CEB8FC /* Vespers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vespers.cpp; sourceTree = "<group>"; };
@@ -1025,6 +1028,7 @@
 				8EFD6815C031741FFAA1A001 /* ofxTimecode */,
 				1F293A20D2B096D59C4F24DD /* ofxTween */,
 				C1D0240E1BE796940081D3ED /* ofxStereoCamera */,
+				C12B2A5E1BF9F8EC00D12D27 /* ofxSimpleTimer */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -1057,6 +1061,24 @@
 				BBAB23BE13894E4700AA2426 /* GLUT.framework */,
 			);
 			name = "3rd party frameworks";
+			sourceTree = "<group>";
+		};
+		C12B2A5E1BF9F8EC00D12D27 /* ofxSimpleTimer */ = {
+			isa = PBXGroup;
+			children = (
+				C12B2A5F1BF9F8EC00D12D27 /* src */,
+			);
+			name = ofxSimpleTimer;
+			sourceTree = "<group>";
+		};
+		C12B2A5F1BF9F8EC00D12D27 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C12B2A601BF9F8EC00D12D27 /* ofxSimpleTimer.cpp */,
+				C12B2A611BF9F8EC00D12D27 /* ofxSimpleTimer.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxSimpleTimer/src;
 			sourceTree = "<group>";
 		};
 		C1A1F6811A7D5BB300CEB8FC /* ofxTimeline */ = {
@@ -1698,6 +1720,7 @@
 				C1A1F6F71A7D5BB300CEB8FC /* ofxTLEmptyKeyframes.cpp in Sources */,
 				C1A1F7021A7D5BB300CEB8FC /* ofxTLSwitches.cpp in Sources */,
 				C1A1F7081A7D5BB300CEB8FC /* ofxTLZoomer.cpp in Sources */,
+				C12B2A621BF9F8EC00D12D27 /* ofxSimpleTimer.cpp in Sources */,
 				C1A1F6F91A7D5BB300CEB8FC /* ofxTLFlags.cpp in Sources */,
 				C1A1F70A1A7D5BB300CEB8FC /* kiss_fftr.c in Sources */,
 				C1A1F6F11A7D5BB300CEB8FC /* ofxTLAudioTrack.cpp in Sources */,
@@ -2015,7 +2038,7 @@
 					/Users/amdayton/Code/ofx/0.8.4/addons/ofxTimeline/libs/sndfile/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/kiss/include/ ../../../addons/ofxTimeline/libs/openal/include/ ../../../addons/ofxTimeline/libs/sndfile/include/";
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/openal/include/ ../../../addons/ofxTimeline/libs/sndfile/include/ ../../../addons/ofxTimeline/libs/kiss/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2110,7 +2133,7 @@
 					/Users/amdayton/Code/ofx/0.8.4/addons/ofxTimeline/libs/sndfile/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/kiss/include/ ../../../addons/ofxTimeline/libs/openal/include/ ../../../addons/ofxTimeline/libs/sndfile/include/";
+				USER_HEADER_SEARCH_PATHS = "../../../addons/ofxTimeline/libs/openal/include/ ../../../addons/ofxTimeline/libs/sndfile/include/ ../../../addons/ofxTimeline/libs/kiss/include/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

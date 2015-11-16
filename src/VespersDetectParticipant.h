@@ -9,21 +9,30 @@
 
 #include "ofMain.h"
 #include "ofxCv.h"
+#include "ofxSimpleTimer.h"
 
 class VespersDetectParticipant {
 
     public:
-        void setup();
+        void setup(ofRectangle r, float thresh);
         void update(ofVideoGrabber &frame);
         void draw(int x, int y, int w, int h);
         void resetBackground();
-        void setRegion(ofRectangle r);
-        float getPresence();
+        void resetBackground(int delay, ofRectangle r);
     
+        void setRegion(ofRectangle roi);
+        void setPresenceThreshold(float thresh);
+    
+        bool getPresence();
+    
+        float pThresh;
         ofImage thresholded;
         cv::Rect region;
-    
-        ofxCv::RunningBackground background;
+        ofxSimpleTimer timer;
+        bool resetInProgress;
         
+        ofxCv::RunningBackground background;    
+        void resetBackgroundHandler(int &args);
+
 
 };
