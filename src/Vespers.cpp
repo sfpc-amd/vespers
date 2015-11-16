@@ -142,7 +142,7 @@ void Vespers::setup(){
 	// final version, this should put the star in the center
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
-    detect.setup(ofRectangle(northStar, detectRegionWidth, detectRegionHeight), detectThreshold);
+    detect.setup(ofRectangle(northStar, detectRegionWidth, detectRegionHeight), detectThreshold, 900, 10);
 }
 
 //--------------------------------------------------------------

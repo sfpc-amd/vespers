@@ -8,18 +8,21 @@
 
 #include "VespersDetectParticipant.h"
 
+void VespersDetectParticipant::setup(ofRectangle r, float thresh, int lTime, int tValue) {
 
-void VespersDetectParticipant::setup(ofRectangle r, float thresh) {
+    learningTime = lTime;
+    thresholdValue = tValue;
 
     setRegion(r);
     setPresenceThreshold(thresh);
 
-	background.setLearningTime(900);
-	background.setThresholdValue(10);
+	background.setLearningTime(learningTime);
+	background.setThresholdValue(thresholdValue);
     
-    resetInProgress = false;
+    resetCycleInProgress = false;
+    resetDelayInProgress = false;
+    resetLearningInProgress = false;
     
-    ofAddListener(timer.TIMER_COMPLETE, this, &VespersDetectParticipant::resetBackgroundHandler);
 }
 
 void VespersDetectParticipant::update(ofVideoGrabber &frame) {
@@ -33,6 +36,8 @@ void VespersDetectParticipant::update(ofVideoGrabber &frame) {
     
     background.update(roi, thresholded);
     thresholded.update();
+ 
+    updateTimer();
 }
 
 
@@ -40,17 +45,58 @@ void VespersDetectParticipant::draw(int x, int y, int w, int h) {
 
     ofPushStyle();
         ofEnableAlphaBlending();
-        if(resetInProgress) {
+        if(resetDelayInProgress) {
             ofSetColor(255, 0, 0);
+        } else if(resetLearningInProgress) {
+            ofSetColor(255, 255, 0);
         } else if(getPresence()) {
             ofSetColor(0, 255, 0);
         } else {
             ofSetColor(255);
         }
         thresholded.draw(x, y, w, h);
-        timer.draw(x, y+h);
+    
+        ofDrawBitmapStringHighlight("Presence: "+ofToString(background.getPresence()), x, y+h);
+    
+        if(resetCycleInProgress) {
+            string output = "";
+            
+            if(resetDelayInProgress) {
+                output += "DELAY: " + ofToString(ofGetElapsedTimeMillis()-resetDelayStartTime) + "/" + ofToString(resetDelay);
+            } else if(resetLearningInProgress) {
+                output += "LEARN:" + ofToString(ofGetFrameNum()-resetLearningStartFrame)+ "/" + ofToString(learningTime);
+            } else {
+                output += "ERROR: booleans misaligned";
+            }
+            
+            ofDrawBitmapStringHighlight(output, x, y+5);
+        
+        }
+    
+    
     ofPopStyle();
 
+}
+
+
+void VespersDetectParticipant::updateTimer() {
+    if(resetCycleInProgress) {
+        if(resetDelayInProgress && (ofGetElapsedTimeMillis()-resetDelayStartTime > resetDelay)) {
+        
+            resetDelayInProgress = false;
+            resetLearningInProgress = true;
+            
+            resetLearningStartFrame = ofGetFrameNum();
+            
+            resetBackground();
+        } else if(resetLearningInProgress && ofGetFrameNum()-resetLearningStartFrame > learningTime) {
+            
+            resetLearningInProgress = false;
+            resetCycleInProgress = false;
+            resetDelayStartTime = 0;
+            resetLearningStartFrame = 0;
+        }
+    }
 }
 
 
@@ -68,25 +114,19 @@ void VespersDetectParticipant::resetBackground() {
 }
 
 void VespersDetectParticipant::resetBackground(int delay, ofRectangle r) {
-
-    resetInProgress = true;
-    setRegion(r);
-
-    timer.setup(delay);
-
     ofLogNotice("Starting background reset timer for "+ofToString(delay)+"ms");
-    // don't loop
-    timer.start(false);
+    setRegion(r);
     
+    resetCycleInProgress = true;
+    resetDelayInProgress = true;
+    resetLearningInProgress = false;
+    
+    // set reset delay
+    resetDelay = delay;
+    resetDelayStartTime = ofGetElapsedTimeMillis();
 }
 
 bool VespersDetectParticipant::getPresence() {
     return background.getPresence() >= pThresh;
-}
-
-void VespersDetectParticipant::resetBackgroundHandler(int &args) {
-    ofLogNotice("Background reset timer complete, resetting bg...");
-    resetBackground();
-    resetInProgress = false;
 }
 

@@ -9,14 +9,16 @@
 
 #include "ofMain.h"
 #include "ofxCv.h"
-#include "ofxSimpleTimer.h"
 
 class VespersDetectParticipant {
 
     public:
-        void setup(ofRectangle r, float thresh);
+        void setup(ofRectangle r, float thresh, int lTime, int tValue);
         void update(ofVideoGrabber &frame);
         void draw(int x, int y, int w, int h);
+    
+        void updateTimer();
+    
         void resetBackground();
         void resetBackground(int delay, ofRectangle r);
     
@@ -25,14 +27,21 @@ class VespersDetectParticipant {
     
         bool getPresence();
     
+        int learningTime;
+        int thresholdValue;
+    
         float pThresh;
         ofImage thresholded;
         cv::Rect region;
-        ofxSimpleTimer timer;
-        bool resetInProgress;
+    
+        bool resetCycleInProgress;
+        bool resetDelayInProgress;
+        bool resetLearningInProgress;
+        int resetDelay;
+        long resetDelayStartTime;
+        long resetLearningStartFrame;
         
         ofxCv::RunningBackground background;    
-        void resetBackgroundHandler(int &args);
 
 
 };
