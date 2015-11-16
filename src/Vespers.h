@@ -8,6 +8,8 @@
 #include "ofxStereoCamera.h"
 
 #include "VespersCv.h"
+#include "VespersDetectParticipant.h"
+
 
 class Vespers : public ofBaseApp {
 
@@ -30,6 +32,8 @@ class Vespers : public ofBaseApp {
 			, float minRadius
 			, float maxRadius
 		);
+    
+        VespersDetectParticipant detect;
 
 
 		void keyPressed(int key);
@@ -66,7 +70,7 @@ class Vespers : public ofBaseApp {
         float textOpacity;
         float shapeOpacity;
 
-        ofxStereoCamera<ofCamera> glasses;
+        ofxStereoCamera<ofCamera> stereoCam;
 
 		// a grabber for our camera
 		ofVideoGrabber grabber;
@@ -128,6 +132,11 @@ class Vespers : public ofBaseApp {
         ofxToggle orbitStars;
         ofxFloatSlider starsCamPan;
         ofxFloatSlider starsCamZoom;
+
+        // detection
+		ofxLabel detectLabel;
+        ofxFloatSlider detectThreshold;
+
 
         // timeline
         ofxTimeline timeline;

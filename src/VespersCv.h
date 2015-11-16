@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ofxCv.h"
 
 class VespersCv {

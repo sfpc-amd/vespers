@@ -21,7 +21,7 @@ void Vespers::setup(){
 	guiWidth = 200;
     
 	// window dimensions for config mode
-	configWindowWidth = 1160;
+	configWindowWidth = 1300;
 	configWindowHeight = 480;
     
 	// window dimensions for sequence mode
@@ -45,12 +45,12 @@ void Vespers::setup(){
 	sampleImage.setImageType(OF_IMAGE_COLOR);
     
     // stereo camera setup
-    glasses.setup(400, 400);
-	glasses.setScale(1, 1, 1);
-	glasses.setPhysicalFocusDistance(50);
-	glasses.setFocusDistance(50);
-	glasses.setNearClip(0.1);
-    glasses.setGlobalPosition(0, 0, 500);
+    stereoCam.setup(400, 400);
+	stereoCam.setScale(1, 1, 1);
+	stereoCam.setPhysicalFocusDistance(50);
+	stereoCam.setFocusDistance(50);
+	stereoCam.setNearClip(0.1);
+    stereoCam.setGlobalPosition(0, 0, 500);
     
 	// video grabber setup
 	grabber.setDesiredFrameRate(30);
@@ -87,6 +87,11 @@ void Vespers::setup(){
 	gui.add(blockSize.setup("Star block size", 3, 0, 10));
     gui.add(starsCamPan.setup("Stars Cam Pan", 0.f, 0.f, 360.f ));
     gui.add(starsCamZoom.setup("Stars Cam Zoom", 415.f, 0.f, 1000.f ));
+
+    // detection
+	gui.add(detectLabel.setup("DETECTION", ""));
+	gui.add(detectThreshold.setup("Detect threshold", 0.09, 0.0, 1.0));
+
 
     // TIMELINE SETUP
 	timeline.setup();
@@ -132,10 +137,13 @@ void Vespers::setup(){
 	// final version, this should put the star in the center
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
+    detect.setup();
+
 }
 
 //--------------------------------------------------------------
 void Vespers::update(){
+
 
     // update video grabber
 	grabber.update();
@@ -156,6 +164,16 @@ void Vespers::update(){
 		// update all images
 		base.update();
 		gray.update();
+        detect.update(grabber);
+        
+        if(detect.getPresence() < detectThreshold) {
+            timeline.stop();
+            timeline.setCurrentFrame(0);
+        } else {
+            timeline.play();
+        }
+        
+//        cout << "presence " << detect.getPresence() << endl;
 	}
     
  	// set window mode
@@ -256,19 +274,19 @@ void Vespers::update(){
     if(sequenceMode) {
     
         // update camera
-        glasses.update(ofRectangle(0, 0, 400, 400));
+        stereoCam.update(ofRectangle(0, 0, 400, 400));
         
         // capture left eye in fbo
-        glasses.beginLeft();
+        stereoCam.beginLeft();
             drawSequence();
             drawTransition();
-        glasses.endLeft();
+        stereoCam.endLeft();
         
         // capture right eye in fbo
-        glasses.beginRight();
+        stereoCam.beginRight();
             drawSequence();
             drawTransition();
-        glasses.endRight();
+        stereoCam.endRight();
     }
     
 }
@@ -326,8 +344,8 @@ void Vespers::draw(){
     
         // if in sequence mode, we draw each eye
         // from the stereo camera separately
-        glasses.drawLeft(0, 80, 400, 400);
-        glasses.drawRight(400, 80, 400, 400);
+        stereoCam.drawLeft(0, 80, 400, 400);
+        stereoCam.drawRight(400, 80, 400, 400);
     } else {
     
         // otherwise just draw normally
@@ -340,9 +358,11 @@ void Vespers::draw(){
             gui.draw();
         }
         // draw base image in greyscale
-        base.draw(camWidth+guiWidth,0);
+//        base.draw(camWidth+guiWidth,0);
+        gray.draw(camWidth+guiWidth,0);
         // draw thresholded image
-        gray.draw(camWidth+guiWidth, procHeight);
+//        gray.draw(camWidth+guiWidth, procHeight);
+        detect.draw(camWidth+guiWidth, procHeight, procWidth, procHeight);
         // draw the Hud
         Vespers::drawHud(5, ofGetHeight()-5);
         // draw the timeline
@@ -453,6 +473,7 @@ void Vespers::drawHud(int x, int y) {
     hud += ofToString(ofGetFrameRate(), 2) + " fps";
     // display elapsed time
     hud += " / " + ofToString(timeline.getCurrentTime(), 1) + "/" + ofToString(timeline.getDurationInSeconds()) +" sec";
+    hud += " / presence: " + ofToString(detect.getPresence());
     // draw hud
     ofDrawBitmapStringHighlight(hud, x, y);
 }
