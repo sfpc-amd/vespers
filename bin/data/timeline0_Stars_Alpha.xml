@@ -1,17 +1,5 @@
 <keyframes>
     <key>
-        <easefunc>0</easefunc>
-        <easetype>0</easetype>
-        <time>00:00:08:965</time>
-        <value>0.375000000</value>
-    </key>
-    <key>
-        <easefunc>0</easefunc>
-        <easetype>0</easetype>
-        <time>00:00:19:416</time>
-        <value>0.733333349</value>
-    </key>
-    <key>
         <easefunc>3</easefunc>
         <easetype>1</easetype>
         <time>00:00:20:716</time>

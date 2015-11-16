@@ -12,41 +12,31 @@ void Vespers::setup(){
     // camera source dimensions
 	camWidth = 720;
 	camHeight = 480;
+    
 	// processing image dimensions
 	procWidth = camWidth/2;
 	procHeight = camHeight/2;
+    
 	// config mode gui dimensions
 	guiWidth = 200;
+    
 	// window dimensions for config mode
 	configWindowWidth = 1160;
 	configWindowHeight = 480;
+    
 	// window dimensions for sequence mode
 	sequenceWindowWidth = 800;
 	sequenceWindowHeight = 480;
-    
 
-    // defaults based on target
-    #ifdef TARGET_RASPBERRY_PI
-        sequenceMode = true;
-    #else
-        sequenceMode = false;
-    #endif
-    
+    sequenceMode = false;
     isFullScreen = false;
     drawGui = false;
     
     // load shaders!
-    #ifdef TARGET_OPENGLES
-        camShader.load("shadersES2/camShader");
-        starShader.load("shadersES2/starShader");
-        afterImageShader.load("shadersES2/afterImageShader");
-        transitionShader.load("shadersES2/transitionShader");
-    #else
-        camShader.load("shadersGL2/camShader");
-        starShader.load("shadersGL2/starShader");
-        afterImageShader.load("shadersGL2/afterImageShader");
-        transitionShader.load("shadersGL2/transitionShader");
-    #endif
+    camShader.load("shadersGL2/camShader");
+    starShader.load("shadersGL2/starShader");
+    afterImageShader.load("shadersGL2/afterImageShader");
+    transitionShader.load("shadersGL2/transitionShader");
 
     // sample image
     useSampleImage = false;
@@ -54,9 +44,7 @@ void Vespers::setup(){
     sampleImage.resize(camWidth, camHeight);
 	sampleImage.setImageType(OF_IMAGE_COLOR);
     
-    // 3d glasses setup
-//        glasses.disableMouseInput();
-//    glasses.disableMouseMiddleButton();
+    // stereo camera setup
     glasses.setup(400, 400);
 	glasses.setScale(1, 1, 1);
 	glasses.setPhysicalFocusDistance(50);
@@ -64,9 +52,9 @@ void Vespers::setup(){
 	glasses.setNearClip(0.1);
     glasses.setGlobalPosition(0, 0, 500);
     
-	// camera setup
-	cam.setDesiredFrameRate(30);
-	cam.initGrabber(camWidth,camHeight);
+	// video grabber setup
+	grabber.setDesiredFrameRate(30);
+	grabber.initGrabber(camWidth,camHeight);
 
     // set up frame buffers
 	mainFbo.allocate(camWidth, camHeight);
@@ -104,7 +92,6 @@ void Vespers::setup(){
 	timeline.setup();
 	timeline.setFrameRate(30);
 	timeline.setDurationInFrames(1000);
-    
     timeline.setPageName("Page Main Sequence");
     timeline.addPage("Page Transition");
 
@@ -129,9 +116,7 @@ void Vespers::setup(){
         timeline.addCurves("Moire Amount", ofRange(1.0, moireMaxAmount));
         timeline.addCurves("Text Opacity", ofRange(1.0, 255.0));
         timeline.addCurves("Shape Opacity", ofRange(0.0, 1.0));
-        // wanted this to be switches but it wasnt working
-//        timeline.addSwitches("Tr Enabled");
-    timeline.setCurrentPage("Page Main Sequence");
+        timeline.setCurrentPage("Page Main Sequence");
 
     // setup listender for bangs
     ofAddListener(timeline.events().bangFired, this, &Vespers::receivedBang);
@@ -147,20 +132,17 @@ void Vespers::setup(){
 	// final version, this should put the star in the center
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
-    #ifdef TARGET_RASPBERRY_PI
-        timeline.hide();
-    #endif
 }
 
 //--------------------------------------------------------------
 void Vespers::update(){
 
-	cam.update();
+    // update video grabber
+	grabber.update();
     
     if(timeline.getValue("Shape Opacity")  > 0) {
         updateTransition();
     }
-    
     
     // if we're calibrating star display,
     // this will always update them
@@ -170,7 +152,7 @@ void Vespers::update(){
     }
     
     // @todo: should this wrap the whole thing?
-	if(cam.isFrameNew()) {
+	if(grabber.isFrameNew()) {
 		// update all images
 		base.update();
 		gray.update();
@@ -245,7 +227,7 @@ void Vespers::update(){
                     sampleImage.draw(0, 0);
                 } else {
                     // draw the actual image
-                    cam.draw(0, 0);
+                    grabber.draw(0, 0);
                 }
                 
                 
@@ -407,17 +389,11 @@ void Vespers::drawSequence() {
 }
 
 void Vespers::drawTransition() {
-//    ofBackground(0);
        float radius = 2*(camHeight/5);
     
         if(timeline.getValue("Shape Opacity")  > 0) {
-        
-
             transitionShader.begin();
-        
                 ofNoFill();
-
-        
                 for(int i = 0; i < abs(moireAmount); i++) {
                 
                     ofPushMatrix();
@@ -443,10 +419,7 @@ void Vespers::drawTransition() {
                     
                }
         
-        
-
             transitionShader.end();
-
             ofSetColor(255);
         }
 }
@@ -457,7 +430,7 @@ void Vespers::setAfterImage() {
         if(useSampleImage) {
             pix = sampleImage.getPixelsRef();
         } else {
-            pix = cam.getPixelsRef();
+            pix = grabber.getPixelsRef();
         }
         
         afterImage.setFromPixels(pix);
@@ -497,7 +470,7 @@ void Vespers::findStars() {
     if(useSampleImage) {
         pix = sampleImage.getPixelsRef();
     } else {
-        pix = cam.getPixelsRef();
+        pix = grabber.getPixelsRef();
     }
     
     
@@ -561,7 +534,7 @@ void Vespers::drawStars(
 	// set the initial camera direction
 	ofVec3f camDirection(0,0,1);
     // find the center of the plane
-	ofVec3f center(cam.getWidth()/2.f,cam.getHeight()/2.f, 0);
+	ofVec3f center(grabber.getWidth()/2.f,grabber.getHeight()/2.f, 0);
     // rotate the camera based on the `starsCamPan` GUI value
 	ofVec3f camDirectionRotated = camDirection.getRotated(starsCamPan, ofVec3f(1,0,0));
     // set the camera position vector
@@ -570,8 +543,6 @@ void Vespers::drawStars(
 	starsCam.setPosition(camPosition);
     // point the camea at the center of th plane
 	starsCam.lookAt(center);
-    // rotate camera around the "North Star" based on the timeline value
-//    starsCam.rotate(timeline.getValue("Stars Rotation"), (camPosition - northStar));
 
     starsFbo.begin();
     ofClear(0,0,0,0);

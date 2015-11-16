@@ -69,7 +69,7 @@ class Vespers : public ofBaseApp {
         ofxStereoCamera<ofCamera> glasses;
 
 		// a grabber for our camera
-		ofVideoGrabber cam;
+		ofVideoGrabber grabber;
 		// base image for processing
 		ofImage base;
 		// processed greyscale image
@@ -78,6 +78,9 @@ class Vespers : public ofBaseApp {
         ofImage afterImage;
         // sample image
         ofImage sampleImage;
+        // bg image to use for bg subtractions
+        ofImage bgImage;
+    
     
 		// canvas for final image
 		ofRectangle canvas;
