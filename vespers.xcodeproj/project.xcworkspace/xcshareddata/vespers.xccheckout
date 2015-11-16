@@ -22,6 +22,8 @@
 		<string>https://github.com/andyinabox/ofxStereoCamera.git</string>
 		<key>9306F8A4B5C13BDC4DDB4D5C22AC1335F4D819E8</key>
 		<string>https://github.com/andyinabox/ofxTimeline.git</string>
+		<key>9819D3CC5E008A062413D8D2B7CAE69A800A4D90</key>
+		<string>https://github.com/HeliosInteractive/ofxSimpleTimer</string>
 		<key>999015EE524680C74335938659F70512196F22AD</key>
 		<string>https://github.com/andreasmuller/ofxAutoReloadedShader.git</string>
 		<key>A6343E16BC2F648D0FEA647FB75CBADE0A25E0B8</key>
@@ -49,6 +51,8 @@
 		<string>../../../addons/ofxStereoCamera</string>
 		<key>9306F8A4B5C13BDC4DDB4D5C22AC1335F4D819E8</key>
 		<string>../../../addons/ofxTimeline</string>
+		<key>9819D3CC5E008A062413D8D2B7CAE69A800A4D90</key>
+		<string>../../../../../addons/ofxSimpleTimer</string>
 		<key>999015EE524680C74335938659F70512196F22AD</key>
 		<string>../../../addons</string>
 		<key>A6343E16BC2F648D0FEA647FB75CBADE0A25E0B8</key>
@@ -115,6 +119,14 @@
 			<string>FE87873B02C5E6719395DDAC8C0C0C585EF1FA8F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxSecondWindow</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9819D3CC5E008A062413D8D2B7CAE69A800A4D90</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSimpleTimer</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

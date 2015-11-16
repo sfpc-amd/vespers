@@ -88,6 +88,7 @@ void VespersDetectParticipant::updateTimer() {
             
             resetLearningStartFrame = ofGetFrameNum();
             
+            setRegion(pendingRegion);
             resetBackground();
         } else if(resetLearningInProgress && ofGetFrameNum()-resetLearningStartFrame > learningTime) {
             
@@ -101,6 +102,7 @@ void VespersDetectParticipant::updateTimer() {
 
 
 void VespersDetectParticipant::setRegion(ofRectangle r) {
+    cout << "set region" << r.x << "," << r.y << "," << r.getWidth() << "," << r.getHeight() << endl;
     region = cv::Rect(r.x, r.y, r.getWidth(), r.getHeight());
 }
 
@@ -115,7 +117,8 @@ void VespersDetectParticipant::resetBackground() {
 
 void VespersDetectParticipant::resetBackground(int delay, ofRectangle r) {
     ofLogNotice("Starting background reset timer for "+ofToString(delay)+"ms");
-    setRegion(r);
+    
+    pendingRegion = r;
     
     resetCycleInProgress = true;
     resetDelayInProgress = true;

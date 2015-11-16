@@ -40,6 +40,7 @@ class VespersDetectParticipant {
         int resetDelay;
         long resetDelayStartTime;
         long resetLearningStartFrame;
+        ofRectangle pendingRegion;
         
         ofxCv::RunningBackground background;    
 

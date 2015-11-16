@@ -142,7 +142,7 @@ void Vespers::setup(){
 	// final version, this should put the star in the center
 	northStar = ofPoint(camWidth/2, camHeight/2);
 
-    detect.setup(ofRectangle(northStar, detectRegionWidth, detectRegionHeight), detectThreshold, 900, 10);
+    detect.setup(ofRectangle(northStar.x-detectRegionWidth/2, northStar.y-detectRegionHeight/2, detectRegionWidth, detectRegionHeight), detectThreshold, 900, 10);
 }
 
 //--------------------------------------------------------------
@@ -362,6 +362,11 @@ void Vespers::draw(){
         if(drawGui) {
             gui.setPosition(camWidth, 0);
             gui.draw();
+            
+            ofPushStyle();
+                ofNoFill();
+                ofRect(ofRectangle(northStar.x - detectRegionWidth/2, northStar.y-detectRegionHeight/2, detectRegionWidth, detectRegionHeight));
+            ofPopStyle();
         }
         // draw base image in greyscale
 //        base.draw(camWidth+guiWidth,0);
@@ -478,9 +483,7 @@ void Vespers::drawHud(int x, int y) {
     // display frames per second
     hud += ofToString(ofGetFrameRate(), 2) + " fps";
     // display elapsed time
-    hud += " / " + ofToString(timeline.getCurrentTime(), 1) + "/" + ofToString(timeline.getDurationInSeconds()) +" sec";
-    hud += " / presence: " + ofToString(detect.getPresence());
-    // draw hud
+    hud += " / " + ofToString(timeline.getCurrentTime(), 1) + "/" + ofToString(timeline.getDurationInSeconds()) +" sec";    // draw hud
     ofDrawBitmapStringHighlight(hud, x, y);
 }
 
@@ -641,7 +644,7 @@ void Vespers::keyPressed(int key){
         case 's': gui.saveToFile("settings.xml"); ofLogVerbose() << "Saved config"; break;
         case 'l': gui.loadFromFile("settings.xml"); ofLogVerbose() << "Loaded config"; break;
         case 'r':
-            detect.resetBackground(resetBackgroundDelay, ofRectangle(northStar, detectRegionWidth, detectRegionHeight));
+            detect.resetBackground(resetBackgroundDelay, ofRectangle(northStar.x - detectRegionWidth/2, northStar.y-detectRegionHeight/2, detectRegionWidth, detectRegionHeight));
             break;
 
 	}
@@ -666,6 +669,7 @@ void Vespers::mouseDragged(int x, int y, int button){
 		northStar.x = transX;
 		northStar.y = transY;
 	}
+    
 }
 
 //--------------------------------------------------------------
