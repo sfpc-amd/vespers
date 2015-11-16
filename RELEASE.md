@@ -4,9 +4,9 @@ Vespers
 Release Notes
 --------------
 
-### 0.7.3
- - Added backgroun subtraction
- - 
+### 0.7.2
+ - Added background subtraction
+ - Fixed issue where camera would move with mouse drag
 
 ### 0.7.1
  - Add transition sequence to timeline
