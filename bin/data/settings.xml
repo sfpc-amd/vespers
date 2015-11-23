@@ -18,4 +18,10 @@
 	<Stars_Cam_Pan>0</Stars_Cam_Pan>
 	<Stars_Cam_Zoom>415</Stars_Cam_Zoom>
 <group/>
+<DETECTION/>
+	<Detect_threshold>0.095</Detect_threshold>
+	<Use_detection>1</Use_detection>
+	<Detect_region_width>97</Detect_region_width>
+	<Detect_region_height>93</Detect_region_height>
+	<Background_reset_delay>2000</Background_reset_delay>
 </group>
